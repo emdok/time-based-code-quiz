@@ -10,7 +10,6 @@ THEN the game is over
 WHEN the game is over
 THEN I can save my initials and score */
 
-// TO DO: Build Array of Question Objects
 // TO DO: Build Function to Start Game
 // TO DO: Build Function to End Game
 // TO DO: Build Function to Continue Game
@@ -77,3 +76,27 @@ var questions = [
         ]
     },
 ];
+var timerEl = document.getElementById('countdown');
+var startBtnEl = document.getElementById('start-btn');
+
+// Timer countdown
+function countDown() {
+    var timeLeft = 60;
+
+    var timeInterval = setInterval(function() {
+        timerEl.textContent = timeLeft;
+        timeLeft --;
+
+        if (timeLeft < 0) {
+            clearInterval(timeInterval);
+        }
+
+    }, 1000);
+}
+
+//Start Button Function
+startBtnEl.addEventListener('click', countDown);
+
+
+
+
