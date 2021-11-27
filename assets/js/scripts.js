@@ -97,9 +97,7 @@ function countDown() {
     }, 1000);
 }
 
-//Start Button Function
-// Starts Timer
-// Displays Quiz Questions
+//start quiz
 startBtnEl.addEventListener('click', function() {
     countDown();
     quizQuestions();
@@ -107,16 +105,17 @@ startBtnEl.addEventListener('click', function() {
 
 //Quiz Question Display Function
 function quizQuestions() {
+
     questionDisplayEl.textContent = questions[0].question;
 
+    // create list elements for quiz options
     questions[0].options.forEach(function(el) {
         var li = document.createElement("li");
-        li.className = "options";
-        li.textContent = el;
+        li.innerHTML = '<button class="option-btn">' + el + '</button>';
         document.body.appendChild(li);
-
+        console.log(li);
     });
-
 };
+
 
 
