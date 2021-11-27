@@ -113,7 +113,7 @@ function quizQuestions() {
     // create list elements for quiz options
     questions[0].options.forEach(function(el) {
         var li = document.createElement("li");
-        li.innerHTML = '<button class="option-btn">' + el + '</button>';
+        li.innerHTML = '<button class="btn option-btn">' + el + '</button>';
         document.body.appendChild(li);
         console.log(li);
     });
