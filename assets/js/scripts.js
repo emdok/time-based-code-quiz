@@ -128,12 +128,13 @@ function quizQuestions() {
 // function to check correct answer on option button click 
 
 function solution() {
-    document.getElementById('options').onclick = function() {
+    var ol = document.querySelector("ol")
+    ol.addEventListener("click", function () {
         quizQuestionsEl.innerHTML = "";
         questionCount++;
         quizQuestions();
-    }
-}
+    });
+};
 
 // function to update question after option click
 
