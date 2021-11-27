@@ -125,7 +125,7 @@ function quizQuestions() {
     solution();
 };
 
-// function to check correct answer on option button click 
+// function to update question after option click
 
 function solution() {
     var ol = document.querySelector("ol")
@@ -136,7 +136,7 @@ function solution() {
     });
 };
 
-// function to update question after option click
+// function to check if answer is correct
 
 // function to display right or wrong and store points
 
