@@ -81,8 +81,7 @@ var introEl = document.getElementById('intro');
 var timerEl = document.getElementById('countdown');
 var startBtnEl = document.getElementById('start-btn');
 var quizQuestionsEl = document.getElementById('quiz-questions');
-var questionDisplayEl = document.getElementById('question-display');
-var answerDisplayEl = document.getElementById('answer-display');
+var questionDisplayH2El = document.getElementById('question-display');
 var questionCount = 0;
 
 // Timer countdown
@@ -110,34 +109,26 @@ startBtnEl.addEventListener('click', function () {
 //Quiz Question Display Function
 function quizQuestions() {
 
-    questionDisplayEl.textContent = questions[questionCount].question;
+    questionDisplayH2El.textContent = questions[questionCount].question;
+    var ol = document.createElement("ol");
+    quizQuestionsEl.append(ol);
 
     //create list elements for quiz options
     questions[questionCount].options.forEach(function (el) {
-        var attrVal = 1;
         var li = document.createElement("li");
         li.innerHTML = '<button class="btn option-btn" id="options">' + el + '</button>';
-        li.setAttribute("data-value", attrVal);
-        document.body.appendChild(li);
-        console.log(attrVal);
-        return attrVal++;
-        
-        
-    });
+        document.querySelector('ol').appendChild(li);
 
-    solution();
+    });
 };
 
 // function to check correct answer on option button click 
 
-function solution() {
-    document.getElementById('options').onclick = function() {
-        questionCount ++;
-        answerDisplayEl.removeChild(li);
-        quizQuestions();  
-    }
-
-}
+// function solution() {
+//     document.getElementById('options').onclick = function() {
+//         alert('button clicked');
+//     }
+// }
 
 // function to update question after option click
 
