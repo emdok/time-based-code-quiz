@@ -117,5 +117,12 @@ function quizQuestions() {
     });
 };
 
+// function to check correct answer on option button click 
+
+// function to update question after option click
+
+// function to display right or wrong and store points
+
+// end game function, game ends when time hits 0 or player reaches end of questions, displays High Scores
 
 
