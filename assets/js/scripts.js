@@ -133,7 +133,6 @@ function solution() {
         questionCount++;
         quizQuestions();
     }
-    return questionCount;
 }
 
 // function to update question after option click
