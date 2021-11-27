@@ -81,7 +81,6 @@ var introEl = document.getElementById('intro');
 var timerEl = document.getElementById('countdown');
 var startBtnEl = document.getElementById('start-btn');
 var quizQuestionsEl = document.getElementById('quiz-questions');
-var questionDisplayH2El = document.getElementById('question-display');
 var questionCount = 0;
 
 // Timer countdown
@@ -108,8 +107,9 @@ startBtnEl.addEventListener('click', function () {
 
 //Quiz Question Display Function
 function quizQuestions() {
-
-    questionDisplayH2El.textContent = questions[questionCount].question;
+    var quizQuestionsH2El = document.createElement("h2");
+    quizQuestionsEl.append(quizQuestionsH2El);
+    quizQuestionsH2El.textContent = questions[questionCount].question;
     var ol = document.createElement("ol");
     quizQuestionsEl.append(ol);
 
@@ -118,8 +118,9 @@ function quizQuestions() {
         var li = document.createElement("li");
         li.innerHTML = '<button class="btn option-btn" id="options">' + el + '</button>';
         document.querySelector('ol').appendChild(li);
-
+        console.log(li);
     });
+
 };
 
 // function to check correct answer on option button click 
