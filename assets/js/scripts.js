@@ -26,55 +26,56 @@ var questions = [
         answer: "Cascading Style Sheet",
         options: [
             "Clean Style Sheet",
-            "Curious Style Sheet",
             "Cascading Style Sheet",
+            "Correct Style Sheet",
             "Computed Style Sheet"
         ]
+
     },
-    {
-        num: 2,
+{
+    num: 2,
         question: "When a function belongs to an object, what is that called?",
-        answer: "A Method",
-        options: [
-            "A String",
-            "A Method",
-            "An Array",
-            "An Expression"
-        ]
-    },
-    {
-        num: 3,
+            answer: "A Method",
+                options: [
+                    "A String",
+                    "A Method",
+                    "An Array",
+                    "An Expression"
+                ]
+},
+{
+    num: 3,
         question: "What are the two ways to create a function?",
-        answer: "Function Declaration & Function Expression",
-        options: [
-            "Function String & Function Array",
-            "Function Object & Function Expression",
-            "Function Declaration & Function Array",
-            "Function Declaration & Function Expression"
-        ]
-    },
-    {
-        num: 4,
+            answer: "Function Declaration & Function Expression",
+                options: [
+                    "Function String & Function Array",
+                    "Function Object & Function Expression",
+                    "Function Declaration & Function Array",
+                    "Function Declaration & Function Expression"
+                ]
+},
+{
+    num: 4,
         question: "What is Global Scope as it pertains to a variable?",
-        answer: "Any variable declared in the document that is not inside of a function",
-        options: [
-            "Any variable declared in the document that is not inside of a function",
-            "Any variable declared in the document that is inside of a function",
-            "Any variable declared in the document that is declared in a different js file",
-            "Any variable declared in the document that is a number"
-        ]
-    },
-    {
-        num: 5,
+            answer: "Any variable declared in the document that is not inside of a function",
+                options: [
+                    "Any variable declared in the document that is not inside of a function",
+                    "Any variable declared in the document that is inside of a function",
+                    "Any variable declared in the document that is declared in a different js file",
+                    "Any variable declared in the document that is a number"
+                ]
+},
+{
+    num: 5,
         question: "Using a period between the object name and property is called what?",
-        answer: "Dot Notation",
-        options: [
-            "Dot Conjunction",
-            "Dot Notation",
-            "Dot Addition",
-            "Dot Companionship"
-        ]
-    },
+            answer: "Dot Notation",
+                options: [
+                    "Dot Conjunction",
+                    "Dot Notation",
+                    "Dot Addition",
+                    "Dot Companionship"
+                ]
+},
 ];
 var introEl = document.getElementById('intro');
 var timerEl = document.getElementById('countdown');
@@ -82,14 +83,15 @@ var startBtnEl = document.getElementById('start-btn');
 var quizQuestionsEl = document.getElementById('quiz-questions');
 var questionDisplayEl = document.getElementById('question-display');
 var answerDisplayEl = document.getElementById('answer-display');
+var questionCount = 0;
 
 // Timer countdown
 function countDown() {
     var timeLeft = 60;
 
-    var timeInterval = setInterval(function() {
+    var timeInterval = setInterval(function () {
         timerEl.textContent = timeLeft;
-        timeLeft --;
+        timeLeft--;
 
         if (timeLeft < 0) {
             clearInterval(timeInterval);
@@ -99,7 +101,7 @@ function countDown() {
 }
 
 //start quiz
-startBtnEl.addEventListener('click', function() {
+startBtnEl.addEventListener('click', function () {
     introEl.style.display = "none";
     countDown();
     quizQuestions();
@@ -108,18 +110,34 @@ startBtnEl.addEventListener('click', function() {
 //Quiz Question Display Function
 function quizQuestions() {
 
-    questionDisplayEl.textContent = questions[0].question;
+    questionDisplayEl.textContent = questions[questionCount].question;
 
-    // create list elements for quiz options
-    questions[0].options.forEach(function(el) {
+    //create list elements for quiz options
+    questions[questionCount].options.forEach(function (el) {
+        var attrVal = 1;
         var li = document.createElement("li");
-        li.innerHTML = '<button class="btn option-btn">' + el + '</button>';
+        li.innerHTML = '<button class="btn option-btn" id="options">' + el + '</button>';
+        li.setAttribute("data-value", attrVal);
         document.body.appendChild(li);
-        console.log(li);
+        console.log(attrVal);
+        return attrVal++;
+        
+        
     });
+
+    solution();
 };
 
 // function to check correct answer on option button click 
+
+function solution() {
+    document.getElementById('options').onclick = function() {
+        questionCount ++;
+        answerDisplayEl.removeChild(li);
+        quizQuestions();  
+    }
+
+}
 
 // function to update question after option click
 
