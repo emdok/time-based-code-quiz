@@ -76,6 +76,7 @@ var questions = [
         ]
     },
 ];
+var introEl = document.getElementById('intro');
 var timerEl = document.getElementById('countdown');
 var startBtnEl = document.getElementById('start-btn');
 var quizQuestionsEl = document.getElementById('quiz-questions');
@@ -99,6 +100,7 @@ function countDown() {
 
 //start quiz
 startBtnEl.addEventListener('click', function() {
+    introEl.style.display = "none";
     countDown();
     quizQuestions();
 });
