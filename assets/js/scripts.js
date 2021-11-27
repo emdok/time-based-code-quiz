@@ -78,6 +78,9 @@ var questions = [
 ];
 var timerEl = document.getElementById('countdown');
 var startBtnEl = document.getElementById('start-btn');
+var quizQuestionsEl = document.getElementById('quiz-questions');
+var questionDisplayEl = document.getElementById('question-display');
+var answerDisplayEl = document.getElementById('answer-display');
 
 // Timer countdown
 function countDown() {
@@ -95,8 +98,25 @@ function countDown() {
 }
 
 //Start Button Function
-startBtnEl.addEventListener('click', countDown);
+// Starts Timer
+// Displays Quiz Questions
+startBtnEl.addEventListener('click', function() {
+    countDown();
+    quizQuestions();
+});
 
+//Quiz Question Display Function
+function quizQuestions() {
+    questionDisplayEl.textContent = questions[0].question;
 
+    questions[0].options.forEach(function(el) {
+        var li = document.createElement("li");
+        li.className = "options";
+        li.textContent = el;
+        document.body.appendChild(li);
+
+    });
+
+};
 
 
