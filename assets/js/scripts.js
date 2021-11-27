@@ -81,6 +81,7 @@ var introEl = document.getElementById('intro');
 var timerEl = document.getElementById('countdown');
 var startBtnEl = document.getElementById('start-btn');
 var quizQuestionsEl = document.getElementById('quiz-questions');
+var solutionEl = document.getElementById('solution');
 var questionCount = 0;
 
 // Timer countdown
@@ -107,7 +108,9 @@ startBtnEl.addEventListener('click', function () {
 
 //Quiz Question Display Function
 function quizQuestions() {
-    console.log(questionCount);
+
+
+
     var quizQuestionsH2El = document.createElement("h2");
     quizQuestionsEl.append(quizQuestionsH2El);
     quizQuestionsH2El.textContent = questions[questionCount].question;
@@ -126,11 +129,26 @@ function quizQuestions() {
 };
 
 // function to update question after option click
-
+var userAnswer = "";
 function solution() {
     var ol = document.querySelector("ol")
-    ol.addEventListener("click", function () {
-        quizQuestionsEl.innerHTML = "";
+    ol.addEventListener("click", function (evt) {
+        quizQuestionsEl.innerHTML = ""; 
+        userAnswer = evt.target.textContent;
+
+        if (userAnswer === questions[questionCount].answer) {
+            var rightAnswerEl = document.createElement("h2");
+            rightAnswerEl.id = "user-answer";
+            solutionEl.append(rightAnswerEl);
+            rightAnswerEl.textContent = "Correct!";
+        } 
+        else {
+            var wrongAnswerEl = document.createElement("h2");
+            wrongAnswerEl.id = "user-answer";
+            solutionEl.append(wrongAnswerEl);
+            wrongAnswerEl.textContent = "Wrong!";
+        }
+
         questionCount++;
         quizQuestions();
     });
