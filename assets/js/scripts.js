@@ -107,6 +107,7 @@ startBtnEl.addEventListener('click', function () {
 
 //Quiz Question Display Function
 function quizQuestions() {
+    console.log(questionCount);
     var quizQuestionsH2El = document.createElement("h2");
     quizQuestionsEl.append(quizQuestionsH2El);
     quizQuestionsH2El.textContent = questions[questionCount].question;
@@ -121,15 +122,19 @@ function quizQuestions() {
         console.log(li);
     });
 
+    solution();
 };
 
 // function to check correct answer on option button click 
 
-// function solution() {
-//     document.getElementById('options').onclick = function() {
-//         alert('button clicked');
-//     }
-// }
+function solution() {
+    document.getElementById('options').onclick = function() {
+        quizQuestionsEl.innerHTML = "";
+        questionCount++;
+        quizQuestions();
+    }
+    return questionCount;
+}
 
 // function to update question after option click
 
