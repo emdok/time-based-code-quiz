@@ -143,16 +143,25 @@ function answerCheck(choice) {
         rightAnswerEl.id = "user-answer";
         solutionEl.append(rightAnswerEl);
         rightAnswerEl.textContent = "Correct!";
+        setTimeout(function() {
+            solutionEl.innerHTML = ""
+        }, 1000)
     }
     else {
         var wrongAnswerEl = document.createElement("h2");
         wrongAnswerEl.id = "user-answer";
         solutionEl.append(wrongAnswerEl);
         wrongAnswerEl.textContent = "Wrong!";
+        setTimeout(function() {
+            solutionEl.innerHTML = ""
+        }, 1000)
     }
+
     questionCount++;
     quizQuestions();
 };
+
+
 
 
 
