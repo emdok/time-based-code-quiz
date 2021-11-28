@@ -32,50 +32,50 @@ var questions = [
         ]
 
     },
-{
-    num: 2,
+    {
+        num: 2,
         question: "When a function belongs to an object, what is that called?",
-            answer: "A Method",
-                options: [
-                    "A String",
-                    "A Method",
-                    "An Array",
-                    "An Expression"
-                ]
-},
-{
-    num: 3,
+        answer: "A Method",
+        options: [
+            "A String",
+            "A Method",
+            "An Array",
+            "An Expression"
+        ]
+    },
+    {
+        num: 3,
         question: "What are the two ways to create a function?",
-            answer: "Function Declaration & Function Expression",
-                options: [
-                    "Function String & Function Array",
-                    "Function Object & Function Expression",
-                    "Function Declaration & Function Array",
-                    "Function Declaration & Function Expression"
-                ]
-},
-{
-    num: 4,
+        answer: "Function Declaration & Function Expression",
+        options: [
+            "Function String & Function Array",
+            "Function Object & Function Expression",
+            "Function Declaration & Function Array",
+            "Function Declaration & Function Expression"
+        ]
+    },
+    {
+        num: 4,
         question: "What is Global Scope as it pertains to a variable?",
-            answer: "Any variable declared in the document that is not inside of a function",
-                options: [
-                    "Any variable declared in the document that is not inside of a function",
-                    "Any variable declared in the document that is inside of a function",
-                    "Any variable declared in the document that is declared in a different js file",
-                    "Any variable declared in the document that is a number"
-                ]
-},
-{
-    num: 5,
+        answer: "Any variable declared in the document that is not inside of a function",
+        options: [
+            "Any variable declared in the document that is not inside of a function",
+            "Any variable declared in the document that is inside of a function",
+            "Any variable declared in the document that is declared in a different js file",
+            "Any variable declared in the document that is a number"
+        ]
+    },
+    {
+        num: 5,
         question: "Using a period between the object name and property is called what?",
-            answer: "Dot Notation",
-                options: [
-                    "Dot Conjunction",
-                    "Dot Notation",
-                    "Dot Addition",
-                    "Dot Companionship"
-                ]
-},
+        answer: "Dot Notation",
+        options: [
+            "Dot Conjunction",
+            "Dot Notation",
+            "Dot Addition",
+            "Dot Companionship"
+        ]
+    },
 ];
 var introEl = document.getElementById('intro');
 var timerEl = document.getElementById('countdown');
@@ -108,9 +108,6 @@ startBtnEl.addEventListener('click', function () {
 
 //Quiz Question Display Function
 function quizQuestions() {
-
-
-
     var quizQuestionsH2El = document.createElement("h2");
     quizQuestionsEl.append(quizQuestionsH2El);
     quizQuestionsH2El.textContent = questions[questionCount].question;
@@ -133,28 +130,33 @@ var userAnswer = "";
 function solution() {
     var ol = document.querySelector("ol")
     ol.addEventListener("click", function (evt) {
-        quizQuestionsEl.innerHTML = ""; 
+        quizQuestionsEl.innerHTML = "";
         userAnswer = evt.target.textContent;
-
-        if (userAnswer === questions[questionCount].answer) {
-            var rightAnswerEl = document.createElement("h2");
-            rightAnswerEl.id = "user-answer";
-            solutionEl.append(rightAnswerEl);
-            rightAnswerEl.textContent = "Correct!";
-        } 
-        else {
-            var wrongAnswerEl = document.createElement("h2");
-            wrongAnswerEl.id = "user-answer";
-            solutionEl.append(wrongAnswerEl);
-            wrongAnswerEl.textContent = "Wrong!";
-        }
-
-        questionCount++;
-        quizQuestions();
+        answerCheck(userAnswer);
     });
 };
 
-// function to check if answer is correct
+function answerCheck(choice) {
+
+    if (choice === questions[questionCount].answer) {
+        var rightAnswerEl = document.createElement("h2");
+        rightAnswerEl.id = "user-answer";
+        solutionEl.append(rightAnswerEl);
+        rightAnswerEl.textContent = "Correct!";
+    }
+    else {
+        var wrongAnswerEl = document.createElement("h2");
+        wrongAnswerEl.id = "user-answer";
+        solutionEl.append(wrongAnswerEl);
+        wrongAnswerEl.textContent = "Wrong!";
+    }
+    questionCount++;
+    quizQuestions();
+};
+
+
+
+// Need to remomve previously right or wrong answer
 
 // function to display right or wrong and store points
 
