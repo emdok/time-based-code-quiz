@@ -1,6 +1,4 @@
 /*
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
 WHEN the game is over
 THEN I can save my initials and score */
 
@@ -101,6 +99,10 @@ startBtnEl.addEventListener('click', function () {
 
 //Quiz Question Display Function
 function quizQuestions() {
+    if (questionCount > 4) {
+        endGame();
+    };
+
     var quizQuestionsH2El = document.createElement("h2");
     quizQuestionsEl.append(quizQuestionsH2El);
     quizQuestionsH2El.textContent = questions[questionCount].question;
@@ -113,6 +115,7 @@ function quizQuestions() {
         li.innerHTML = '<button class="btn option-btn" id="options">' + el + '</button>';
         document.querySelector('ol').appendChild(li);
     });
+
 
     solution();
 };
@@ -168,11 +171,10 @@ function endGame() {
     scoreEl.textContent = userScore;
     var formEl = document.createElement("form");
     formEl.id = "score-form";
-    formEl.setAttribute("action", "../high-scores.html")
     var textInputEl = document.createElement("input")
     textInputEl.setAttribute("type", "text");
     textInputEl.id = "user-name";
-    textInputEl.setAttribute("placeholder", "Enter Name");
+    textInputEl.setAttribute("placeholder", "Initials");
     var submitButtonEl = document.createElement("input");
     submitButtonEl.setAttribute("type", "submit");
     submitButtonEl.setAttribute("value", "Submit");
@@ -181,10 +183,10 @@ function endGame() {
     quizQuestionsEl.append(scoreEl, formEl);
 };
 
-document.addEventListener("submit", function(event) {
+document.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    storageCounter ++;
+    storageCounter++;
     var userName = document.querySelector("#user-name").value;
     userInfo.name = userName;
     userInfo.score = userScore;
