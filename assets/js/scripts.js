@@ -178,6 +178,7 @@ function endGame() {
     var submitButtonEl = document.createElement("input");
     submitButtonEl.setAttribute("type", "submit");
     submitButtonEl.setAttribute("value", "Submit");
+    submitButtonEl.setAttribute("onclick", "Redirect()");
     formEl.appendChild(textInputEl);
     formEl.appendChild(submitButtonEl);
     quizQuestionsEl.append(scoreEl, formEl);
@@ -195,9 +196,12 @@ document.addEventListener("submit", function (event) {
     console.log(userInfo);
 });
 
-// function pushToHighScorePage() {
-//     JSON.parse(localStorage.getItem())
-// }
+function Redirect() {
+    window.location.href = "high-scores.html";
+};
+
+
+
 
 // function to display right or wrong and store points
 
