@@ -1,19 +1,9 @@
 /*
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
 WHEN all questions are answered or the timer reaches 0
 THEN the game is over
 WHEN the game is over
 THEN I can save my initials and score */
 
-// TO DO: Build Function to Start Game
-// TO DO: Build Function to End Game
-// TO DO: Build Function to Continue Game
-// TO DO: Build function for Timer
-// TO DO: Build Function to display qusetions from array
-// TO DO: Build Function to capture score
-// TO DO: Function to display and store score
-// TO DO: 
 
 var questions = [
     {
@@ -79,7 +69,7 @@ var startBtnEl = document.getElementById('start-btn');
 var quizQuestionsEl = document.getElementById('quiz-questions');
 var solutionEl = document.getElementById('solution');
 var questionCount = 0;
-var timeLeft = 2;
+var timeLeft = 60;
 var userScore = 0;
 var userInfo = {
     name: "",
@@ -178,7 +168,7 @@ function endGame() {
     scoreEl.textContent = userScore;
     var formEl = document.createElement("form");
     formEl.id = "score-form";
-    formEl.setAttribute("action", "high-scores.html")
+    formEl.setAttribute("action", "../high-scores.html")
     var textInputEl = document.createElement("input")
     textInputEl.setAttribute("type", "text");
     textInputEl.id = "user-name";
@@ -202,6 +192,10 @@ document.addEventListener("submit", function(event) {
 
     console.log(userInfo);
 });
+
+// function pushToHighScorePage() {
+//     JSON.parse(localStorage.getItem())
+// }
 
 // function to display right or wrong and store points
 
