@@ -85,6 +85,7 @@ var userInfo = {
     name: "",
     score: 0
 };
+var storageCounter = 0;
 
 // Timer countdown
 function countDown() {
@@ -177,6 +178,7 @@ function endGame() {
     scoreEl.textContent = userScore;
     var formEl = document.createElement("form");
     formEl.id = "score-form";
+    formEl.setAttribute("action", "high-scores.html")
     var textInputEl = document.createElement("input")
     textInputEl.setAttribute("type", "text");
     textInputEl.id = "user-name";
@@ -192,9 +194,11 @@ function endGame() {
 document.addEventListener("submit", function(event) {
     event.preventDefault();
 
+    storageCounter ++;
     var userName = document.querySelector("#user-name").value;
     userInfo.name = userName;
     userInfo.score = userScore;
+    localStorage.setItem('userInfo' + storageCounter, JSON.stringify(userInfo));
 
     console.log(userInfo);
 });
