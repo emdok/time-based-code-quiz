@@ -84,7 +84,7 @@ var userScore = 0;
 
 // Timer countdown
 function countDown() {
-    
+
     var timeInterval = setInterval(function () {
         timerEl.textContent = timeLeft;
         timeLeft--;
@@ -142,7 +142,7 @@ function answerCheck(choice) {
         solutionEl.append(rightAnswerEl);
         rightAnswerEl.textContent = "Correct!";
         userScore += 20;
-        setTimeout(function() {
+        setTimeout(function () {
             solutionEl.innerHTML = ""
         }, 1000)
 
@@ -153,10 +153,10 @@ function answerCheck(choice) {
         solutionEl.append(wrongAnswerEl);
         wrongAnswerEl.textContent = "Wrong!";
         timeLeft -= 10;
-        setTimeout(function() {
+        setTimeout(function () {
             solutionEl.innerHTML = ""
         }, 1000)
-        
+
     }
 
     questionCount++;
