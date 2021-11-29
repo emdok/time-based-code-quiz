@@ -79,8 +79,12 @@ var startBtnEl = document.getElementById('start-btn');
 var quizQuestionsEl = document.getElementById('quiz-questions');
 var solutionEl = document.getElementById('solution');
 var questionCount = 0;
-var timeLeft = 60;
+var timeLeft = 2;
 var userScore = 0;
+var userInfo = {
+    name: "",
+    score: 0
+};
 
 // Timer countdown
 function countDown() {
@@ -117,7 +121,6 @@ function quizQuestions() {
         var li = document.createElement("li");
         li.innerHTML = '<button class="btn option-btn" id="options">' + el + '</button>';
         document.querySelector('ol').appendChild(li);
-        console.log(li);
     });
 
     solution();
@@ -164,14 +167,19 @@ function answerCheck(choice) {
 };
 
 function endGame() {
+    // clear quiz questions
     var solutionEl = document.getElementById("quiz-questions");
     solutionEl.innerHTML = "";
+
+    // create high score form
     var scoreEl = document.createElement("h2");
     scoreEl.id = "user-score";
     scoreEl.textContent = userScore;
     var formEl = document.createElement("form");
+    formEl.id = "score-form";
     var textInputEl = document.createElement("input")
     textInputEl.setAttribute("type", "text");
+    textInputEl.id = "user-name";
     textInputEl.setAttribute("placeholder", "Enter Name");
     var submitButtonEl = document.createElement("input");
     submitButtonEl.setAttribute("type", "submit");
@@ -181,8 +189,15 @@ function endGame() {
     quizQuestionsEl.append(scoreEl, formEl);
 };
 
+document.addEventListener("submit", function(event) {
+    event.preventDefault();
 
+    var userName = document.querySelector("#user-name").value;
+    userInfo.name = userName;
+    userInfo.score = userScore;
 
+    console.log(userInfo);
+});
 
 // function to display right or wrong and store points
 
