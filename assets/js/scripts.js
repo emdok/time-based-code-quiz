@@ -1,8 +1,4 @@
 /*
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
 WHEN I answer a question incorrectly
 THEN time is subtracted from the clock
 WHEN all questions are answered or the timer reaches 0
@@ -83,17 +79,19 @@ var startBtnEl = document.getElementById('start-btn');
 var quizQuestionsEl = document.getElementById('quiz-questions');
 var solutionEl = document.getElementById('solution');
 var questionCount = 0;
+var timeLeft = 60;
+var userScore = 0;
 
 // Timer countdown
 function countDown() {
-    var timeLeft = 60;
-
+    
     var timeInterval = setInterval(function () {
         timerEl.textContent = timeLeft;
         timeLeft--;
 
         if (timeLeft < 0) {
             clearInterval(timeInterval);
+            endGame();
         }
 
     }, 1000);
@@ -143,29 +141,48 @@ function answerCheck(choice) {
         rightAnswerEl.id = "user-answer";
         solutionEl.append(rightAnswerEl);
         rightAnswerEl.textContent = "Correct!";
+        userScore += 20;
         setTimeout(function() {
             solutionEl.innerHTML = ""
         }, 1000)
+
     }
     else {
         var wrongAnswerEl = document.createElement("h2");
         wrongAnswerEl.id = "user-answer";
         solutionEl.append(wrongAnswerEl);
         wrongAnswerEl.textContent = "Wrong!";
+        timeLeft -= 10;
         setTimeout(function() {
             solutionEl.innerHTML = ""
         }, 1000)
+        
     }
 
     questionCount++;
     quizQuestions();
 };
 
+function endGame() {
+    var solutionEl = document.getElementById("quiz-questions");
+    solutionEl.innerHTML = "";
+    var scoreEl = document.createElement("h2");
+    scoreEl.id = "user-score";
+    scoreEl.textContent = userScore;
+    var formEl = document.createElement("form");
+    var textInputEl = document.createElement("input")
+    textInputEl.setAttribute("type", "text");
+    textInputEl.setAttribute("placeholder", "Enter Name");
+    var submitButtonEl = document.createElement("input");
+    submitButtonEl.setAttribute("type", "submit");
+    submitButtonEl.setAttribute("value", "Submit");
+    formEl.appendChild(textInputEl);
+    formEl.appendChild(submitButtonEl);
+    quizQuestionsEl.append(scoreEl, formEl);
+};
 
 
 
-
-// Need to remomve previously right or wrong answer
 
 // function to display right or wrong and store points
 
