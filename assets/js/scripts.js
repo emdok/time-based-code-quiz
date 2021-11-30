@@ -101,23 +101,22 @@ startBtnEl.addEventListener('click', function () {
 function quizQuestions() {
     if (questionCount > 4) {
         endGame();
-    };
+    }
+    else {
+        var quizQuestionsH2El = document.createElement("h2");
+        quizQuestionsEl.append(quizQuestionsH2El);
+        quizQuestionsH2El.textContent = questions[questionCount].question;
+        var ol = document.createElement("ol");
+        quizQuestionsEl.append(ol);
 
-    var quizQuestionsH2El = document.createElement("h2");
-    quizQuestionsEl.append(quizQuestionsH2El);
-    quizQuestionsH2El.textContent = questions[questionCount].question;
-    var ol = document.createElement("ol");
-    quizQuestionsEl.append(ol);
-
-    //create list elements for quiz options
-    questions[questionCount].options.forEach(function (el) {
-        var li = document.createElement("li");
-        li.innerHTML = '<button class="btn option-btn" id="options">' + el + '</button>';
-        document.querySelector('ol').appendChild(li);
-    });
-
-
-    solution();
+        //create list elements for quiz options
+        questions[questionCount].options.forEach(function (el) {
+            var li = document.createElement("li");
+            li.innerHTML = '<button class="btn option-btn" id="options">' + el + '</button>';
+            document.querySelector('ol').appendChild(li);
+        });
+        solution();
+    }
 };
 
 // function to update question after option click
@@ -161,6 +160,8 @@ function answerCheck(choice) {
 };
 
 function endGame() {
+
+    timeLeft = 0;
     // clear quiz questions
     var solutionEl = document.getElementById("quiz-questions");
     solutionEl.innerHTML = "";
@@ -178,7 +179,6 @@ function endGame() {
     var submitButtonEl = document.createElement("input");
     submitButtonEl.setAttribute("type", "submit");
     submitButtonEl.setAttribute("value", "Submit");
-    submitButtonEl.setAttribute("onclick", "Redirect()");
     formEl.appendChild(textInputEl);
     formEl.appendChild(submitButtonEl);
     quizQuestionsEl.append(scoreEl, formEl);
@@ -187,24 +187,59 @@ function endGame() {
 document.addEventListener("submit", function (event) {
     event.preventDefault();
 
+    localStorage.getItem(storageCounter);
     storageCounter++;
     var userName = document.querySelector("#user-name").value;
     userInfo.name = userName;
     userInfo.score = userScore;
     localStorage.setItem('userInfo' + storageCounter, JSON.stringify(userInfo));
-
-    console.log(userInfo);
+    localStorage.setItem('storageCounter', storageCounter);
+    highScores();
 });
 
-function Redirect() {
-    window.location.href = "high-scores.html";
+
+// High Scores Functionality
+// TO DO: Stop Timer when High Scores is called
+
+function highScores() {
+    var solutionEl = document.getElementById("quiz-questions");
+    solutionEl.innerHTML = "";
+    var ol = document.createElement("ol");
+    quizQuestionsEl.append(ol);
+    var backButtonEl = document.createElement("button");
+    backButtonEl.className = "btn";
+    backButtonEl.textContent = "Go back";
+    backButtonEl.setAttribute("onclick", "location.href='index.html'");
+    quizQuestionsEl.append(backButtonEl);
+    var clearScoresButtonEl = document.createElement("button");
+    clearScoresButtonEl.id = "clear-scores";
+    clearScoresButtonEl.className = "btn";
+    clearScoresButtonEl.textContent = "Clear Scores";
+    quizQuestionsEl.append(clearScoresButtonEl);
+
+    document.getElementById("clear-scores").addEventListener("click", function () {
+        localStorage.clear();
+        var ol = document.querySelector("ol");
+        ol.innerHTML = "";
+    })
+
+    allStorage();
 };
 
+function allStorage() {
+    var values = [],
+        keys = Object.keys(localStorage),
+        i = keys.length;
 
+    while (i--) {
+        values.push(JSON.parse(localStorage.getItem(keys[i])));
+    }
 
-
-// function to display right or wrong and store points
-
-// end game function, game ends when time hits 0 or player reaches end of questions, displays High Scores
-
+    values.forEach(function (el) {
+        var li = document.createElement("li");
+        li.textContent = el.name + el.score;
+        var ol = document.querySelector("ol");
+        ol.appendChild(li);
+    });
+};
 
