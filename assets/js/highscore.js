@@ -8,7 +8,8 @@ function getScores() {
 
     userScores.sort(function (a, b) {
         return a.score - b.score;
-    })
+        
+    });
     console.log(userScores);
 
 
