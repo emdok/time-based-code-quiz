@@ -8,9 +8,8 @@ function sortScores() {
     userScores.sort(function (a, b) {
         return b.score - a.score;
     });
-    console.log(userScores);
 
-displayScores();
+    displayScores();
 };
 
 function displayScores() {
