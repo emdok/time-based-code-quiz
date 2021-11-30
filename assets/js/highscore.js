@@ -1,33 +1,26 @@
-// High Scores Functionality
+var highScoresEl = document.getElementById("high-scores");
 
-function highScores() {
+getScores();
 
-    document.getElementById("clear-scores").addEventListener("click", function () {
-        localStorage.clear();
-        var ol = document.querySelector("ol");
-        ol.innerHTML = "";
+function getScores() {
+    var userScores = JSON.parse(localStorage.getItem("userInfo"));
+    console.log(userScores);
+
+    userScores.sort(function (a, b) {
+        return a.score - b.score;
     })
+    console.log(userScores);
 
-    allStorage();
-};
 
-function allStorage() {
-    var values = [],
-        keys = Object.keys(localStorage),
-        i = keys.length;
+    // for (var i = 0; i < userScores.length; i++) {
+    //     var li = document.createElement("li");
+    //     li.textContent = userScores[i].name.concat(" ", userScores[i].score);
+    //     highScoresEl.appendChild(li);
+    // }
 
-    while (i--) {
-        values.push(JSON.parse(localStorage.getItem(keys[i])));
-    }
-
-    values.forEach(function (el) {
-        var li = document.createElement("li");
-        li.textContent = el.name + el.score;
-        var ol = document.querySelector("ol");
-        ol.appendChild(li);
-    });
 };
 
 function clearScores() {
     localStorage.clear();
 };
+
