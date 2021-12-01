@@ -1,27 +1,10 @@
 /*
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
 WHEN the game is over
 THEN I can save my initials and score */
 
-// TO DO: Build Function to Start Game
-// TO DO: Build Function to End Game
-// TO DO: Build Function to Continue Game
-// TO DO: Build function for Timer
-// TO DO: Build Function to display qusetions from array
-// TO DO: Build Function to capture score
-// TO DO: Function to display and store score
-// TO DO: 
 
 var questions = [
     {
-        num: 1,
         question: "What does CSS stand for?",
         answer: "Cascading Style Sheet",
         options: [
@@ -33,7 +16,6 @@ var questions = [
 
     },
     {
-        num: 2,
         question: "When a function belongs to an object, what is that called?",
         answer: "A Method",
         options: [
@@ -44,7 +26,6 @@ var questions = [
         ]
     },
     {
-        num: 3,
         question: "What are the two ways to create a function?",
         answer: "Function Declaration & Function Expression",
         options: [
@@ -55,7 +36,6 @@ var questions = [
         ]
     },
     {
-        num: 4,
         question: "What is Global Scope as it pertains to a variable?",
         answer: "Any variable declared in the document that is not inside of a function",
         options: [
@@ -66,7 +46,6 @@ var questions = [
         ]
     },
     {
-        num: 5,
         question: "Using a period between the object name and property is called what?",
         answer: "Dot Notation",
         options: [
@@ -83,17 +62,23 @@ var startBtnEl = document.getElementById('start-btn');
 var quizQuestionsEl = document.getElementById('quiz-questions');
 var solutionEl = document.getElementById('solution');
 var questionCount = 0;
+var timeLeft = 60;
+var userScore = 0;
+var userInfo = {
+    name: "",
+    score: 0
+};
+var storageCounter = 0;
 
 // Timer countdown
 function countDown() {
-    var timeLeft = 60;
-
     var timeInterval = setInterval(function () {
         timerEl.textContent = timeLeft;
         timeLeft--;
 
         if (timeLeft < 0) {
             clearInterval(timeInterval);
+            endGame();
         }
 
     }, 1000);
@@ -108,26 +93,32 @@ startBtnEl.addEventListener('click', function () {
 
 //Quiz Question Display Function
 function quizQuestions() {
-    var quizQuestionsH2El = document.createElement("h2");
-    quizQuestionsEl.append(quizQuestionsH2El);
-    quizQuestionsH2El.textContent = questions[questionCount].question;
-    var ol = document.createElement("ol");
-    quizQuestionsEl.append(ol);
 
-    //create list elements for quiz options
-    questions[questionCount].options.forEach(function (el) {
-        var li = document.createElement("li");
-        li.innerHTML = '<button class="btn option-btn" id="options">' + el + '</button>';
-        document.querySelector('ol').appendChild(li);
-        console.log(li);
-    });
+    if (questionCount > 4) {
+        endGame();
+    }
+    else {
+        var quizQuestionsH2El = document.createElement("h2");
+        quizQuestionsEl.append(quizQuestionsH2El);
+        quizQuestionsH2El.textContent = questions[questionCount].question;
+        var ol = document.createElement("ol");
+        ol.className = "solution";
+        quizQuestionsEl.append(ol);
 
-    solution();
+        //create list elements for quiz options
+        questions[questionCount].options.forEach(function (el) {
+            var li = document.createElement("li");
+            li.innerHTML = '<button class="btn option-btn" id="options">' + el + '</button>';
+            document.querySelector('ol').appendChild(li);
+        });
+        solution();
+    }
 };
 
 // function to update question after option click
 var userAnswer = "";
 function solution() {
+
     var ol = document.querySelector("ol")
     ol.addEventListener("click", function (evt) {
         quizQuestionsEl.innerHTML = "";
@@ -141,34 +132,78 @@ function answerCheck(choice) {
     if (choice === questions[questionCount].answer) {
         var rightAnswerEl = document.createElement("h2");
         rightAnswerEl.id = "user-answer";
+        rightAnswerEl.className = "user-answer";
         solutionEl.append(rightAnswerEl);
         rightAnswerEl.textContent = "Correct!";
-        setTimeout(function() {
+        userScore += 20;
+        setTimeout(function () {
             solutionEl.innerHTML = ""
         }, 1000)
+
     }
     else {
         var wrongAnswerEl = document.createElement("h2");
         wrongAnswerEl.id = "user-answer";
+        wrongAnswerEl.className = "user-answer";
         solutionEl.append(wrongAnswerEl);
         wrongAnswerEl.textContent = "Wrong!";
-        setTimeout(function() {
+        timeLeft -= 10;
+        setTimeout(function () {
             solutionEl.innerHTML = ""
         }, 1000)
+
     }
 
     questionCount++;
     quizQuestions();
 };
 
+function endGame() {
 
+    timeLeft = 0;
+    // clear quiz questions
+    var solutionEl = document.getElementById("quiz-questions");
+    solutionEl.innerHTML = "";
 
+    // create high score form
+    var scoreEl = document.createElement("h2");
+    scoreEl.id = "user-score";
+    scoreEl.textContent = "Your Score:" + " " + userScore;
+    var formEl = document.createElement("form");
+    formEl.id = "score-form";
+    var textInputEl = document.createElement("input")
+    textInputEl.setAttribute("type", "text");
+    textInputEl.id = "user-name";
+    textInputEl.setAttribute("placeholder", "Initials");
+    var submitButtonEl = document.createElement("input");
+    submitButtonEl.setAttribute("type", "submit");
+    submitButtonEl.setAttribute("value", "Submit");
+    submitButtonEl.setAttribute("onclick", "submitLocation()");
+    formEl.appendChild(textInputEl);
+    formEl.appendChild(submitButtonEl);
+    quizQuestionsEl.append(scoreEl, formEl);
+    
+};
 
+document.addEventListener("submit", function (event) {
+    event.preventDefault();
+    debugger;
+    var parsed = JSON.parse(localStorage.getItem("userInfo"));
+    
+    if (parsed === null || parsed == undefined) {
+        parsed = [];
+    }
 
-// Need to remomve previously right or wrong answer
+    var userName = document.querySelector("#user-name").value;
 
-// function to display right or wrong and store points
+    userInfo.name = userName;
+    userInfo.score = userScore;
+    parsed.push(userInfo);
 
-// end game function, game ends when time hits 0 or player reaches end of questions, displays High Scores
+    localStorage.setItem('userInfo', JSON.stringify(parsed));
+});
 
+function submitLocation() {
+    window.location.href = "high-scores.html";
+};
 
