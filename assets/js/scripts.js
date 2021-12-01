@@ -102,6 +102,7 @@ function quizQuestions() {
         quizQuestionsEl.append(quizQuestionsH2El);
         quizQuestionsH2El.textContent = questions[questionCount].question;
         var ol = document.createElement("ol");
+        ol.className = "solution";
         quizQuestionsEl.append(ol);
 
         //create list elements for quiz options
@@ -131,6 +132,7 @@ function answerCheck(choice) {
     if (choice === questions[questionCount].answer) {
         var rightAnswerEl = document.createElement("h2");
         rightAnswerEl.id = "user-answer";
+        rightAnswerEl.className = "user-answer";
         solutionEl.append(rightAnswerEl);
         rightAnswerEl.textContent = "Correct!";
         userScore += 20;
@@ -142,6 +144,7 @@ function answerCheck(choice) {
     else {
         var wrongAnswerEl = document.createElement("h2");
         wrongAnswerEl.id = "user-answer";
+        wrongAnswerEl.className = "user-answer";
         solutionEl.append(wrongAnswerEl);
         wrongAnswerEl.textContent = "Wrong!";
         timeLeft -= 10;
@@ -165,7 +168,7 @@ function endGame() {
     // create high score form
     var scoreEl = document.createElement("h2");
     scoreEl.id = "user-score";
-    scoreEl.textContent = userScore;
+    scoreEl.textContent = "Your Score:" + " " + userScore;
     var formEl = document.createElement("form");
     formEl.id = "score-form";
     var textInputEl = document.createElement("input")

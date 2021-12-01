@@ -12,20 +12,22 @@
 <body>
     <header>
         <p><a href="high-scores.html">High Scores!</a></p>
-        <p>Time:</p>
-        <p id="countdown"></p>
+        <div class="timer">
+            <p>Time:</p>
+            <p id="countdown"></p>
+        </div>
     </header>
     <main>
-        <section id="intro">
-            <h1>Coding Quiz Challenge</h1>
-            <p>To answer the following code related questions within the time. Keep in mind that incorrect answers will
+        <section class="intro" id="intro">
+            <h1 class="section-heading">Coding Quiz Challenge</h1>
+            <p class="section-questions">To answer the following code related questions within the time. Keep in mind that incorrect answers will
                 penalize your score/time by 10 seconds.</p>
             <div class="start-btn">
-                <button class="btn" id="start-btn">Start Quiz!</button>
+                <button class="btn start-btn" id="start-btn">Start Quiz!</button>
             </div>
         </section>
 
-        <section class="quiz-questions" id="quiz-questions">
+        <section class="section-questions intro" id="quiz-questions">
         </section>
         <section id="solution">
 

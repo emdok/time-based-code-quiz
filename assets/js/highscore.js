@@ -1,7 +1,10 @@
 var highScoresEl = document.getElementById("high-scores");
 var userScores = JSON.parse(localStorage.getItem("userInfo"));
 
-sortScores();
+
+if (userScores) {
+    sortScores();
+}
 
 function sortScores() {
 
@@ -22,6 +25,8 @@ function displayScores() {
 
 
 function clearScores() {
+    var highScoreOlEl = document.querySelector("ol");
+    highScoreOlEl.innerHTML = "";
     localStorage.clear();
 };
 
