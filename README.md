@@ -14,7 +14,7 @@ https://emdok.github.io/time-based-code-quiz/
 ## Usage
 
     ```md
-    ![code quiz](assets/img/cocde-quiz-img.jpg)
+    ![code quiz image](assets/img/code-quiz-img.jpg)
     ```
 ## Credits
 Emily Dokken
