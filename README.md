@@ -1,5 +1,23 @@
 # time-based-code-quiz
+## Description
+This is a javascript coding quiz built using javascript. It is time based and you can earn points to gain a high score.
+## Table of Contents (Optional)
 
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+## Installation
+You can view the the website here:
+
+https://emdok.github.io/time-based-code-quiz/
+## Usage
+
+    ```md
+    ![code quiz](assets/img/cocde-quiz-img.jpg)
+    ```
+## Credits
+Emily Dokken
 ## License
 
 MIT License
