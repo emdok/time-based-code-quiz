@@ -188,7 +188,7 @@ function endGame() {
 
 document.addEventListener("submit", function (event) {
     event.preventDefault();
-    debugger;
+
     var parsed = JSON.parse(localStorage.getItem("userInfo"));
     
     if (parsed === null || parsed == undefined) {
