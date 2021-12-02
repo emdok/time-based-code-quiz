@@ -168,6 +168,7 @@ function endGame() {
     // create high score form
     var scoreEl = document.createElement("h2");
     scoreEl.id = "user-score";
+    scoreEl.className = "user-score";
     scoreEl.textContent = "Your Score:" + " " + userScore;
     var formEl = document.createElement("form");
     formEl.id = "score-form";
